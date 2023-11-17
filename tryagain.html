@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+</head>
+<body>
+  <h1>Login</h1>
+  
+  <label for="userType">Select User Type:</label>
+  <select id="userType">
+    <option value="student">Student</option>
+    <option value="admin">Admin</option>
+  </select>
+  
+  <!-- Student Login Section -->
+  <div id="studentLogin" style="display: block;">
+    <h2>Student</h2>
+    <form id="studentForm">
+      <label for="studentName">Name:</label>
+      <input type="text" id="studentName" name="studentName" required><br><br>
+      
+      <label for="course">Course:</label>
+      <input type="text" id="course" name="course" required><br><br>
+      
+      <label for="studentID">Student ID:</label>
+      <input type="text" id="studentID" name="studentID" required><br><br>
+      
+      <input type="checkbox" id="consent" name="consent">
+      <label for="consent">I consent to the use of my medical records.</label><br><br>
+      
+      <input type="submit" value="Login">
+    </form>
+  </div>
+  
+  <!-- Admin Login Section -->
+  <div id="adminLogin" style="display: none;">
+    <h2>Admin</h2>
+    <form id="adminForm">
+      <label for="username">Username:</label>
+      <input type="text" id="adminUsername" name="username" required><br><br>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="adminPassword" name="password" required><br><br>
+      
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('userType').addEventListener('change', function() {
+      var userType = this.value;
+      if (userType === 'student') {
+        document.getElementById('studentLogin').style.display = 'block';
+        document.getElementById('adminLogin').style.display = 'none';
+      } else if (userType === 'admin') {
+        document.getElementById('studentLogin').style.display = 'none';
+        document.getElementById('adminLogin').style.display = 'block';
+      }
+    });
+
+    document.getElementById('adminForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var username = document.getElementById('adminUsername').value;
+      var password = document.getElementById('adminPassword').value;
+
+      // Admin credentials
+      var admins = {
+        'admin1': '123',
+        'admin2': '456',
+        'admin3': '789'
+      };
+
+      if (admins.hasOwnProperty(username)) {
+        if (admins[username] === password) {
+          alert('Log-In Successfully. You\'ll be directed to SCAS PORTAL');
+          // Redirect to SCAS Portal or perform other actions
+        } else {
+          alert('Username and Password Does not Match');
+        }
+      } else {
+        alert('Incorrect username and password');
+      }
+    });
+  </script>
+</body>
+</html>
